@@ -6,7 +6,10 @@ from keras.preprocessing import sequence
 from keras.initializers import glorot_uniform
 
 
+X_train, Y_train = read_csv('data/train_emoji.csv')
+X_test, Y_test = read_csv('data/tesss.csv')
 
+maxLen = len(max(X_train, key=len).split())
 
 
 
