@@ -4,14 +4,18 @@ from keras.layers import Dense, Input, Dropout, LSTM, Activation
 from keras.layers.embeddings import Embedding
 from keras.preprocessing import sequence
 from keras.initializers import glorot_uniform
+from emo_utils import *
 
 
-X_train, Y_train = read_csv('data/train_emoji.csv')
-X_test, Y_test = read_csv('data/tesss.csv')
+X_train, Y_train = read_csv('sentence_train.csv')
+X_test, Y_test = read_csv('sentence_test.csv')
 
 maxLen = len(max(X_train, key=len).split())
 
+Y_oh_train = convert_to_one_hot(Y_train, C = 5)
+Y_oh_test = convert_to_one_hot(Y_test, C = 5)
 
+word_to_index, index_to_word, word_to_vec_map = read_glove_vecs('glove.6B.50d.txt')
 
 def sentences_to_indices(X, word_to_index, max_len):
     """
